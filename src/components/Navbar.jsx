@@ -1,5 +1,8 @@
 import navbarIcon from "../assets/navbar-icon.svg"
 import NavbarItem from "./NavbarItem"
+import secureLocalStorage from "react-secure-storage";
+import { Context } from "../Context";
+import { useContext } from "react";
 
 
 const navbarItems = [
@@ -17,6 +20,7 @@ const navbarItems = [
 
 
 const Navbar = () => {
+    const { setTrigger } = useContext(Context);
     return (
         <nav className="w-full bg-white border-gray-200 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -138,6 +142,12 @@ const Navbar = () => {
                             />
                         </svg>
                     </button>
+                    <button
+                        className="border-[1px] border-red-600 px-3 py-1 rounded-lg text-red-600 ml-4"
+                        onClick={() => {
+                            document.cookie = `accessToken=`;
+                            setTrigger((prevState) => !prevState);
+                        }}>Log out</button>
                 </div>
             </div>
         </nav>
