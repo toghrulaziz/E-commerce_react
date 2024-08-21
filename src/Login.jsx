@@ -24,8 +24,10 @@ const Login = () => {
 
         if(response.ok){
             toast.success("Login successfully");
+            navigate("/home");
             const data = await response.json();
             document.cookie = `accessToken=${data.accessToken}`;
+            document.cookie = `refreshToken=${data.refreshToken}`;
             rememberMe && secureLocalStorage.setItem("accessToken", data.accessToken);
             setTrigger((prevState) => !prevState);
         } else{
